@@ -1,0 +1,114 @@
+!!! html
+//if lt IE 7
+    html(class="no-js ie6 oldie", lang="en")
+//if IE 7
+    html(class="no-js ie7 oldie", lang="en")
+//if IE 8
+    html(class="no-js ie8 oldie", lang="en")
+// [if gt IE 8] <!
+html(class="no-js", lang="en")
+  // <![endif]
+  head
+    meta(charset='utf-8')
+    title= title
+    
+    // include CSS Files
+    link(rel='stylesheet', href='/stylesheets/foundation.css')
+    link(rel='stylesheet', href='/stylesheets/app.css')
+    
+    |   <!--[if lt IE 9]>
+    |   <link rel="stylesheet" href="stylesheets/ie.css">
+    |   <![endif]-->
+
+    |   <!-- IE Fix for HTML5 Tags -->
+    |   <!--[if lt IE 9]>
+    |     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    |   <![endif]-->
+  
+  body
+  a(href='https://github.com/swallentin/express-foundation')
+    img(style='position: absolute; top: 0; right: 0; border: 0; z-index: 50', src='http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png', alt='Fork me on Github')
+    // container
+    .container
+      .row
+        div(class'twelve columns')
+          h2 Welcome to Express Foundation. Using Foundation by Zurb with Node.js on Express with Jade and Stylus.
+          p This is version 2.1.5 released on Januaru 26, 2012
+          hr
+      .row
+        div(class='eight columns')
+          h3 The Grid
+          // Grid Example
+          .row
+            div(class='twelve columns')
+              .panel
+                p This is a twelve column section in a row. Each of these includes a div.panel element so you can see where the columns are - it's not required at all for the grid.
+          .row
+            div(class='six columns')
+              .panel
+                p Six columns
+            div(class='six columns')
+              .panel
+                p Six columns
+          .row
+            div(class='four columns')
+              .panel
+                p Four columns
+            div(class='four columns')
+              .panel
+                p Four columns
+            div(class='four columns')
+              .panel
+                p Four columns
+            h3 Tabs
+            dl.tabs
+              dd
+                a(href='#simple1', class='active') Simple Tab 1
+              dd
+                a(href='#simple2') Simple Tab 2
+              dd
+                a(href='#simple3') Simple Tab 3
+
+            ul.tabs-content
+              li(class='active', id='simple1Tab') This is simple tab 1's content. Pretty neat, huh?
+              li(id='simple2Tab') This is simple tab 2's content. Now you see it!
+              li(id='simple3Tab') This is simple tab 3's content. It's, you know...okay.
+            h3 Buttons
+            p 
+              a(href='#', class='small blue button') Small Blue Button
+            p
+              a(href='#', class='blue button') Medium Blue Button
+            p
+              a(href='#', class='large blue button') Large Blue Button
+
+            p 
+              a(href='#', class='nice radius small blue button') Nice Blue Button
+            p
+              a(href='#', class='nice radius blue button') Nice Blue Button
+            p
+              a(href='#', class='nice radius large blue button') Nice Blue Button
+        div(class='four columns')
+          h4 Getting Started
+          p We're stoked you want to try Foundation! To get going, this file (index.html) includes some basic styles you can modify, play around with, or totally destroy to get going.
+
+          h4 Other Resources
+          p Once you've exhausted the fun in this document, you should check out:
+          ul.disc
+            li  
+              a(href='http://foundation.zurb.com/docs') Foundation Documentation
+              br
+              | Everything you need to know about using the framework.
+            li
+              a(href='http://github.com/zurb/foundation') Foundation on Github</a>
+              br
+              | Latest code, issue reports, feature requests and more.
+            li
+              a(href='http://twitter.com/foundationzurb') @foundationzurb
+              br
+              | Ping us on Twitter if you have questions. If you build something with this we'd love to see it (and send you a totally boss sticker).
+    // container
+    // Included JS Files
+    script(src='javascripts/jquery.min.js')
+    script(src='javascripts/modernizr.foundation.js')
+    script(src='javascripts/foundation.js')
+    script(src='javascripts/app.js')
