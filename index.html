@@ -1,8 +1,57 @@
+<!doctype html>
 <html>
-<head>
-  <title></title>
-</head>
-<body>
-  testar
-</body>
+  
+  <head>
+    <meta char-set="utf-8" />
+    <title>
+    </title>
+    <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+  </head>
+  
+  <body>
+    <div class='content'>
+      <div id='gallery' class="gallery">
+        <div class='viewer'>
+        </div>
+        <div class='control'>
+          <a class='btn btn-previous btn-navigate navigate' target='#gallery' action='previous'>
+          </a>
+          <a class='btn btn-next btn-navigate navigate' target='#gallery' action='next'>
+          </a>
+        </div>
+        <div class='thumbnails'>
+ 
+        </div>
+      </div>
+    </div>
+    <script src="assets/js/libs/jquery.js">
+            
+    </script>    
+    <script src="assets/js/libs/transition.js">
+            
+    </script>    
+    <script src="assets/js/libs/handlebars.js">
+            
+    </script>
+    <script src="assets/js/gallery.js">
+            
+    </script>
+    <script src="assets/js/scripts.js">
+            
+    </script>
+    <script id='viewer-template' type='text/x-handlebars-template'>
+      <div class="item">
+        <img src="{{url}}" class="img">
+      </div>    
+    </script>
+    <script id='thumbnail-template' type='text/x-handlebars-template'>
+      <div class="thumbnail navigate" action='to' target='{{target}}'>
+        <img src="{{url}}" class='img'>
+      </div>
+    </script>
+    <script>
+    document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')
+    </script>
+  </body>
+
 </html>
