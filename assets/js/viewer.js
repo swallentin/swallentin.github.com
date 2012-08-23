@@ -1,7 +1,7 @@
 (function ($) {
   "use strict";
 
- var Gallery = function(element, options) {
+ var Viewer = function(element, options) {
 
   this.$element = $(element);
   this.options = options;
@@ -9,7 +9,7 @@
   var that = this;
   var render = function(data) {
     $.each(data.items, function(i, item) {
-      item.media.m = item.media.m.replace('_m', '_z');
+
       if( options.viewerTemplate ) {
         var html = options.viewerTemplate({
           url: item.media.m,
@@ -19,7 +19,7 @@
         that.$element.find('.viewer').append(html);
       }
 
-      if( options.thumbnailTemplate ) {
+      if( options.viewerTemplate ) {
           var html = options.thumbnailTemplate({
           url: item.media.m,
           target: '#' + that.$element.attr('id')
@@ -27,38 +27,6 @@
         that.$element.find('.thumbnails').append(html);
       }
     });
-
-    that.$element.find('.thumbnails img').parent().addClass('loading');
-
-    // that.$element.find('.viewer').imagesLoaded(function($images, $proper, $broken) {
-    //   // callback provides three arguments:
-    //   // $images: the jQuery object with all images
-    //   // $proper: the jQuery object with properly loaded images
-    //   // $broken: the jQuery object with broken images
-    //   // `this` is a jQuery object of container
-    //   console.log( $images.length + ' images total have been loaded in ' + $(this).attr('class') );
-    //   console.log( $proper.length + ' properly loaded images' );
-    //   console.log( $broken.length + ' broken images' );
-    // });
-    that.$element.find('.thumbnails').imagesLoaded()
-      .progress( function( isBroken, $images, $proper, $broken ){
-        // function scope (this) is a jQuery object with image that has just finished loading
-        // callback provides four arguments:
-        // isBroken: boolean value of whether the loaded image (this) is broken
-        // $images:  jQuery object with all images in set
-        // $proper:  jQuery object with properly loaded images so far
-        // $broken:  jQuery object with broken images so far
-        $(this).parent().removeClass('loading');
-        console.log( 'Loading progress: ' + ( $proper.length + $broken.length ) + ' out of ' + $images.length );
-
-      })
-      .fail(function() {
-        $(this).parent().removeClass('loading');
-        $(this).parent().addClass('fail');
-      })
-      .done( function() {
-        console.log('all images has finished loading.');
-      });
 
     options.effects && options.effects(that.$element);
     that.to(0);
@@ -113,30 +81,29 @@
     } else {
       $('.viewer .item.active').fadeTo(500, 0, function() {
         $children.removeClass('active');
-        $next.addClass('active').fadeTo(500,1);
-
+        $next.addClass('active');
+        $next.fadeTo(500, 1);
         that.sliding = false;
       });
     }
-
     return this;
   },
   next: function() {
-    console.log('next()');
     var targetPosition = this.activePosition()+1;
 
     if( targetPosition >= this.numberOfItems() )
       targetPosition = 0;
 
+    // return this.to(targetPosition);
     return this.update('next', targetPosition);
   },
   previous: function() {
-    console.log('previous()');
     var targetPosition = this.activePosition()-1;
 
     if( targetPosition <= 0 )
       targetPosition = this.numberOfItems()-1;
 
+    // return this.to(targetPosition);
     return this.update('previous', targetPosition);
   },
   activePosition: function() {
@@ -161,17 +128,9 @@
     var $this = $(this)
     , data = $this.data('gallery')
     , options = $.extend({}, $.fn.gallery.defaults, typeof option == 'object' && option);
-    
-    if(!data) {
-      // Create a new gallery and store it in the element using jQuery key/value data() storage
-      $this.data('gallery', (data = new Gallery(this, options)));
-    } 
-    if (typeof option == 'number') {
-      data.to(option);
-    }
-    if (typeof option == 'string') {
-      data[option]();
-    }
+    if(!data) $this.data('gallery', (data = new Gallery(this, options)));
+    if (typeof option == 'number') data.to(option);
+    else if (typeof option == 'string') data[option]();
   })
  }
 
@@ -194,6 +153,7 @@
     // and what action to send to the target. if the action is 'to' then figure out which
     // item to navigate to and send it as an option to the gallery
     // default option is navigating to previous or next
+    console.log('hello');
     var $this = $(this)
       , target
       , $targetEl = $((target = $this.attr('data-element')))
